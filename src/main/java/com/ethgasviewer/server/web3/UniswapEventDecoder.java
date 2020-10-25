@@ -37,6 +37,9 @@ public class UniswapEventDecoder {
 
     public UniswapTx decodeInputData(Transaction transaction) {
         String data = transaction.getInput();
+        if (data == null || data.length() < 74) {
+            return null;
+        }
         String methodID = data.substring(0, 10);
         String input = data.substring(10);
         List<TypeReference<Type>> parameters = parametersByMethodId.get(methodID);

@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.ethgasviewer.server.Application.GRAB_PROFILE;
+
 @RestController
-@Profile("grab")
+//@Profile(GRAB_PROFILE)
 public class TokenController {
     private final TokenInfoService tokenInfoService;
 

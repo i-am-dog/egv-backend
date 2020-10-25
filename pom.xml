@@ -16,6 +16,7 @@
 
     <properties>
         <web3j>4.6.3</web3j>
+        <okhttp3>4.9.0</okhttp3>
     </properties>
 
     <repositories>
@@ -88,6 +89,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!--******************************************-->
@@ -126,11 +133,15 @@
             <version>3.6</version>
         </dependency>
 
-        <dependency>
+      <dependency><!--   conflict with okhttp V4-->
             <groupId>com.github.pengrad</groupId>
             <artifactId>java-telegram-bot-api</artifactId>
             <version>4.9.0</version>
             <exclusions>
+                <exclusion>
+                    <groupId>com.squareup.okhttp3</groupId>
+                    <artifactId>okhttp</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>com.squareup.okhttp3</groupId>
                     <artifactId>logging-interceptor</artifactId>
@@ -157,24 +168,50 @@
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>4.9.0</version>
+            <version>${okhttp3}</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp-ws</artifactId>
-            <version>3.4.2</version>
+            <artifactId>okhttp-urlconnection</artifactId>
+            <version>${okhttp3}</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>logging-interceptor</artifactId>
-            <version>4.9.0</version>
+            <version>${okhttp3}</version>
         </dependency>
+
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
             <version>1.4.10</version>
         </dependency>
 
+<!--        spring websocket third party-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>webjars-locator-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>sockjs-client</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>stomp-websocket</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>3.3.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.1.1-1</version>
+        </dependency>
 
     </dependencies>
 
@@ -205,7 +242,7 @@
                             <classpathPrefix>lib/</classpathPrefix>
                             <classpathLayoutType>custom</classpathLayoutType>
                             <customClasspathLayout>${artifact.artifactId}-${artifact.baseVersion}${dashClassifier?}.${artifact.extension}</customClasspathLayout>
-                            <mainClass>com.ethgasviewer.server.GrabberApplication</mainClass>
+                            <mainClass>com.ethgasviewer.server.Application</mainClass>
                         </manifest>
                     </archive>
                     <outputDirectory>./dist</outputDirectory>

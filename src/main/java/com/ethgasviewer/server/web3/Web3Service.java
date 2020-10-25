@@ -4,7 +4,6 @@ import com.ethgasviewer.server.properties.Web3Properties;
 import io.reactivex.disposables.Disposable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.Web3j;
@@ -20,10 +19,10 @@ import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-import static com.ethgasviewer.server.Web3Application.WEB3_PROFILE;
+import static com.ethgasviewer.server.Application.WEB3_PROFILE;
 
 @Service
-@Profile(WEB3_PROFILE)
+//@Profile(WEB3_PROFILE)
 public class Web3Service {
     public static final DefaultBlockParameter BLOCK_NUMBER = DefaultBlockParameter.valueOf(new BigInteger("11044276"));
 

@@ -1,7 +1,6 @@
 package com.ethgasviewer.server.web3;
 
-import com.ethgasviewer.server.GrabberApplication;
-import com.ethgasviewer.server.Web3Application;
+import com.ethgasviewer.server.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.ethgasviewer.server.Web3Application.WEB3_PROFILE;
+import static com.ethgasviewer.server.Application.WEB3_PROFILE;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Web3Application.class)
+@SpringBootTest(classes = Application.class)
 @ActiveProfiles({"test", WEB3_PROFILE})
 public class Web3ServiceTest {
 

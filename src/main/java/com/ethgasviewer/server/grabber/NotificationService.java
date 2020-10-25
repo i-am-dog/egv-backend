@@ -4,10 +4,10 @@ import com.ethgasviewer.server.properties.GrabProperties;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
-import static com.ethgasviewer.server.GrabberApplication.GRAB_PROFILE;
+import static com.ethgasviewer.server.Application.GRAB_PROFILE;
 
 @Service
-@Profile({GRAB_PROFILE})
+//@Profile({GRAB_PROFILE})
 public class NotificationService {
     private static final String PRICE_MSG = "Price changed from %.2f to %.2f (%.1f%%)";
 

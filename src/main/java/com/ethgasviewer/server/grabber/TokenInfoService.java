@@ -20,11 +20,11 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ethgasviewer.server.GrabberApplication.GRAB_PROFILE;
+import static com.ethgasviewer.server.Application.GRAB_PROFILE;
 
 
 @Service
-@Profile({GRAB_PROFILE})
+//@Profile({GRAB_PROFILE})
 public class TokenInfoService {
     private static final Logger log = LoggerFactory.getLogger(TokenInfoService.class);
     private static final RestTemplate REST_TEMPLATE = new RestTemplate();

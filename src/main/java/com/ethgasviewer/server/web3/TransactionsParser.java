@@ -4,15 +4,16 @@ import com.ethgasviewer.server.model.UniswapTx;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.core.methods.response.Transaction;
 
 import javax.annotation.PostConstruct;
 
-import static com.ethgasviewer.server.Web3Application.WEB3_PROFILE;
+import static com.ethgasviewer.server.Application.WEB3_PROFILE;
 
 @Service
-@Profile(WEB3_PROFILE)
+//@Profile(WEB3_PROFILE)
 public class TransactionsParser {
     private static final Logger log = LoggerFactory.getLogger(TransactionsParser.class);
     public static final String UNI_ROUTER = "0x7a250d5630b4cf539739df2c5dacb4c659f2488d";
@@ -20,9 +21,11 @@ public class TransactionsParser {
     public static final String FARM_SUSHI_TOKEN_CONTRACT = "0x53df6664b3ddE086DCe6315c317d1002b14B87E3";
     private final UniswapEventDecoder uniswapEventDecoder = new UniswapEventDecoder();
     private final Web3Service web3Service;
+    private final SimpMessagingTemplate messagingTemplate;
 
-    public TransactionsParser(Web3Service web3Service) {
+    public TransactionsParser(Web3Service web3Service, SimpMessagingTemplate messagingTemplate) {
         this.web3Service = web3Service;
+        this.messagingTemplate = messagingTemplate;
     }
 
     @PostConstruct
@@ -50,6 +53,7 @@ public class TransactionsParser {
 
         if (uniswapTx.isContainsAddress(FARM_TOKEN_CONTRACT)) {
             log.info("Gotcha FARM " + uniswapTx.toString());
+            messagingTemplate.convertAndSend("/topic/unitx", uniswapTx);
         }
 
     }
